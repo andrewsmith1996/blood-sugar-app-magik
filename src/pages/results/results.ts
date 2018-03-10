@@ -12,6 +12,7 @@ export class ResultsPage {
 	results: any[];
   	level: any;
   	date:any;
+	totalResults:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public userData:UserData) {
 	  
@@ -20,12 +21,14 @@ export class ResultsPage {
   ionViewDidLoad(){
 	this.userData.getResults().then(val => {
 		this.results = val;
+		this.totalResults = this.results.length;
 	});
   }
 
   ionViewWillEnter(){
 	this.userData.getResults().then(val => {
 		this.results = val;
+		this.totalResults = this.results.length;
 	});
 	
   }

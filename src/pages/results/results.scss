@@ -2,5 +2,11 @@ page-results {
     .deleteResult{
         float: right;
     }
+
+    .toolbar-ios{
+        ion-title{
+            padding:0px 60px 0px !important;
+        }
+    }
 }
     

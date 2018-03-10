@@ -43,6 +43,29 @@ export class UserData {
 
 	setCarbNumber(number){
 		this.storage.set('carbNumber', number);
+	}
+	  
+	setLowBounds(bounds){
+		this.storage.set('lowBounds', bounds);
   	}
+	setGoodBounds(bounds){
+		this.storage.set('goodBounds', bounds);
+  	}
+	
+	setHighBounds(bounds){
+		this.storage.set('highBounds', bounds);
+	}
+	  
+	getLowBounds(){
+		return this.storage.get('lowBounds')
+	}
+
+	getGoodBounds(){
+		return this.storage.get('goodBounds')
+	}
+
+	getHighBounds(){
+		return this.storage.get('highBounds')
+	}
 
 }
