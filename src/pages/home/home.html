@@ -8,18 +8,20 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-label floating>mmol/L</ion-label>
+         
+    <ion-label floating>
+        <ion-icon name="stats"></ion-icon>  mmol/L</ion-label>
     <ion-input type="number"[(ngModel)]="level"></ion-input>
 
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Insulin Units</ion-label>
+    <ion-label floating><ion-icon name="text"></ion-icon> Units</ion-label>
     <ion-input type="number"[(ngModel)]="units"></ion-input>
 
   </ion-item>
 
-  <button full round ion-button (click)="saveItem()">Save</button>
+  <button full round ion-button (click)="saveItem()">Add</button>
 
   <ion-card class="statCards">
     

@@ -15,20 +15,22 @@ export class UserData {
   }
 
   	setResults(data){
-		var oldResults = [];
-		oldResults.push(this.getResults());
-		oldResults.push(data);
-		this.storage.set('results', oldResults);
-  	}
-
-	getResults() {
-		var returnedResults = [];
-		this.storage.get('results').then((val) => {
-			returnedResults.push(val);
+		this.getResults().then(val => {
+			if(typeof val == undefined || val == null){
+				this.results = [];
+			} else{
+				this.results = val;
+			}
+			this.results.push(data);
+			this.storage.set('results', this.results);
 		});
+		
+		
+	  }
+	  
 
-		console.log(returnedResults);
-		return returnedResults;
+	getResults() {	
+		return this.storage.get('results');
   	}
 
 	clearData(){

@@ -26,14 +26,43 @@ export class HomePage {
  
   constructor(public navCtrl: NavController, private vibration: Vibration, public toastCtrl: ToastController, public userData: UserData){
 	this.level = "";
-   
-	  let toast = this.toastCtrl.create({
+  }
+
+  ionViewDidLoad(){
+
+	let toast = this.toastCtrl.create({
 		message: 'Welcome back, Andrew!',
 		duration: 5000,
 		position: 'top'
-	  });
-	  toast.present();
+	});
 
+	toast.present();
+
+	this.userData.getResults().then(val => {
+		this.results = val;
+		var total = 0.0;
+		var levels = [];
+
+		for (let result of this.results) {
+			total += parseFloat(result.level);
+			levels.push(parseFloat(result.level));
+		}
+
+		this.latestResult = this.results[this.results.length - 1].level;
+		this.latestTime = this.results[this.results.length - 1].time;
+
+		this.average = (total / this.results.length).toFixed(1);
+
+		this.max = Math.max.apply(null, levels);
+		this.min = Math.min.apply(null, levels);
+
+		});
+  }
+
+  ionViewWillEnter(){
+	this.userData.getResults().then(val => {
+		this.results = val;
+	});
 	
   }
 
@@ -42,18 +71,11 @@ export class HomePage {
 	  var valid = true;
 
 	if(typeof(this.level) == undefined || this.level == ''){
-		  valid = false;
-	  let toast = this.toastCtrl.create({
-		message: 'Invalid data!',
-		duration: 5000,
-		position: 'top'
-		});
-		toast.present();
-	
-		}
+		valid = false;
+		this.showInvalidToast();
+	}
 
 	if(valid == true){
-
 
 	  var current = new Date(); 
 	  this.date = current.getHours() + ":"  + current.getMinutes() + " " + current.getDate() + "/" + (current.getMonth()+1)  + "/"  + current.getFullYear();
@@ -64,29 +86,16 @@ export class HomePage {
 	
   }
 
-  ionViewWillEnter(){
 
-
-		if(this.results != null && this.results.length > 0 ){
-	  
-			var total = 0.0;
-			var levels = [];
-
-			for (let result of this.results) {
-				total += parseFloat(result.level);
-				levels.push(result.level);
-			}
-
-			this.latestResult = this.results[this.results.length - 1].level;
-			this.latestTime = this.results[this.results.length - 1].time;
-
-			this.average = (total / this.results.length).toFixed(1);
-
-			this.max = Math.max.apply(null, levels);
-			this.min = Math.min.apply(null, levels);
-		}
-
-
+	showInvalidToast(){
+		let toast = this.toastCtrl.create({
+			message: 'Invalid data!',
+			duration: 5000,
+			position: 'top'
+		});
+		toast.present();
+		
 	}
+
 	
 }

@@ -18,11 +18,16 @@ export class ResultsPage {
   }
 
   ionViewDidLoad(){
-		this.results = this.userData.getResults();
+	this.userData.getResults().then(val => {
+		this.results = val;
+	});
   }
 
   ionViewWillEnter(){
-		this.results = this.userData.getResults()
+	this.userData.getResults().then(val => {
+		this.results = val;
+	});
+	
   }
 
   deleteStorage(){

@@ -25,14 +25,15 @@ export class CarbsPage {
   }
 
   ionViewDidLoad() {
+    this.buttonClicked = false;
     console.log('ionViewDidLoad CarbsPage');
   }
 
   calculateCarbs(){
+    this.buttonClicked = true;
     this.userData.getCarbNumber().then(val => {
       this.carbNumber = val;
       this.calculatedCarbs = this.carbs / this.carbNumber;
-      this.buttonClicked = !this.buttonClicked;
     })
 
    
