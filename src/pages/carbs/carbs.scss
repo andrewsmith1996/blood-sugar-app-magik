@@ -1,0 +1,21 @@
+page-carbs {
+    h2{
+        color: #488aff;
+        font-size:22px;
+        float:right;
+        display:inline;
+        width:65%;
+        margin:0;
+    }
+    
+    h2.carb-value{
+        font-size: 32px;
+        font-weight:800;
+        float:left;
+        display:inline;
+        border-right:1px solid rgba(0,0,0,0.2);
+        padding:7px;
+        padding-right:10px;
+        width:30%;
+    }
+}

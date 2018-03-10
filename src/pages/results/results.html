@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Previous Results </ion-title>     
+    </ion-navbar>
+    
+  </ion-header>
+  
+  <ion-content padding>
+    
+      <ion-list>
+          <ion-item *ngFor="let result of results">
+            <ion-avatar item-start>
+              <img src="assets/imgs/andrew.png">
+            </ion-avatar>
+            <h2>{{ result.level }} mmol/L  - {{ result.units }}
+              <button ion-button class="deleteResult" color="danger" (click)="delete(result)" clear icon-only>
+                <ion-icon name='trash' is-active="false"></ion-icon>
+              </button></h2>
+            <p>{{ result.time }} </p>
+            
+           
+            
+          </ion-item>
+        </ion-list>
+      <button ion-button color="danger" block (click)="deleteStorage()">Clear</button>
+  </ion-content>
+  

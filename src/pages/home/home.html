@@ -1,17 +1,89 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>New Blood Sugar</ion-title>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-item>
+    <ion-label floating>mmol/L</ion-label>
+    <ion-input type="number"[(ngModel)]="level"></ion-input>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Insulin Units</ion-label>
+    <ion-input type="number"[(ngModel)]="units"></ion-input>
+
+  </ion-item>
+
+  <button full round ion-button (click)="saveItem()">Save</button>
+
+  <ion-card class="statCards">
+    
+        <ion-card-content>
+            <ion-list>
+                <ion-item no-padding>
+                  <ion-thumbnail item-start>
+                    <img src="assets/imgs/andrew.png">
+                  </ion-thumbnail>
+                  <h4> Average Level </h4>
+                  <p> {{ average }} mmol/L </p>
+                </ion-item>
+              </ion-list>
+        </ion-card-content>
+      
+      </ion-card>
+
+      <ion-card class="statCards">
+          
+              <ion-card-content>
+                  <ion-list>
+                      <ion-item no-padding>
+                        <ion-thumbnail item-start>
+                          <img src="assets/imgs/andrew.png">
+                        </ion-thumbnail>
+                        <h4> Latest Result </h4>
+                        <p> {{ latestResult }} mmol/L </p>
+                        <p> {{ latestTime }}</p>
+                      </ion-item>
+                    </ion-list>
+              </ion-card-content>
+
+            
+    </ion-card>
+
+    <ion-card class="statCards">
+        <ion-card-content>
+            <ion-list>
+                <ion-item no-padding>
+                  <ion-thumbnail item-start>
+                    <img src="assets/imgs/andrew.png">
+                  </ion-thumbnail>
+                  <h4> Highest Level </h4>
+                  <p> {{ max }} mmol/L </p>
+                </ion-item>
+              </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="statCards">
+        <ion-card-content>
+            <ion-list>
+                <ion-item no-padding>
+                  <ion-thumbnail item-start>
+                    <img src="assets/imgs/andrew.png">
+                  </ion-thumbnail>
+                  <h4> Lowest Level</h4>
+                  <p> {{ min }} mmol/L </p>
+
+                </ion-item>
+              </ion-list>
+        </ion-card-content>
+    </ion-card>
+  
+
 </ion-content>
+
