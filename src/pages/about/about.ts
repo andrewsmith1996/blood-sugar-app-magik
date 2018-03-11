@@ -25,20 +25,28 @@ export class AboutPage {
 
   ionViewDidLoad() {
 	this.userData.getCarbNumber().then(val => {
-	  this.carbCountValue = val;
+		this.carbCountValue = val;
 	});
 
+
 	this.userData.getLowBounds().then(val =>{
-		this.low = val;
+		if(val != null){
+			this.low = val;
+		}
 	});
 
 	this.userData.getGoodBounds().then(val =>{
-		this.good = val;
+		if(val != null){
+			this.good = val;
+		}
 	});
 
 	this.userData.getHighBounds().then(val =>{
-		this.high = val;
+		if(val != null){
+			this.high = val;
+		}
 	});
+
   }
 
   saveSettings(){

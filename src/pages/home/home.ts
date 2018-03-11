@@ -23,6 +23,10 @@ export class HomePage {
   maxTime: any;
   minTime: any;
   average:any;
+
+  low:any = {};
+  good:any = {};
+  high:any = {};
  
   constructor(public navCtrl: NavController, private vibration: Vibration, public toastCtrl: ToastController, public userData: UserData){
 	this.level = "";
@@ -32,7 +36,7 @@ export class HomePage {
 
 	let toast = this.toastCtrl.create({
 		message: 'Welcome back, Andrew!',
-		duration: 5000,
+		duration: 3000,
 		position: 'top'
 	});
 
@@ -56,13 +60,54 @@ export class HomePage {
 		this.max = Math.max.apply(null, levels);
 		this.min = Math.min.apply(null, levels);
 
-		});
+	});
+
+	
+
+	this.userData.getLowBounds().then(val =>{
+		if(val != null){
+			this.low = val;
+		}
+	});
+
+	this.userData.getGoodBounds().then(val =>{
+		if(val != null){
+			this.good = val;
+		}
+	});
+
+	this.userData.getHighBounds().then(val =>{
+		if(val != null){
+			this.high = val;
+		}
+	});
+
   }
 
   ionViewWillEnter(){
 	this.userData.getResults().then(val => {
 		this.results = val;
 	});
+
+	
+	this.userData.getLowBounds().then(val =>{
+		if(val != null){
+			this.low = val;
+		}
+	});
+
+	this.userData.getGoodBounds().then(val =>{
+		if(val != null){
+			this.good = val;
+		}
+	});
+
+	this.userData.getHighBounds().then(val =>{
+		if(val != null){
+			this.high = val;
+		}
+	});
+
 	
   }
 
@@ -77,10 +122,18 @@ export class HomePage {
 
 	if(valid == true){
 
-	  var current = new Date(); 
-	  this.date = current.getHours() + ":"  + current.getMinutes() + " " + current.getDate() + "/" + (current.getMonth()+1)  + "/"  + current.getFullYear();
-	  var newResult = {'level' : this.level,'time': this.date, 'units': this.units};
-	  this.userData.setResults(newResult);
+		var current = new Date(); 
+	  	this.date = current.getHours() + ":"  + current.getMinutes() + " " + current.getDate() + "/" + (current.getMonth()+1)  + "/"  + current.getFullYear();
+	  
+		var newResult = {
+			'level' : this.level,
+			'time': this.date, 
+			'units': this.units
+		};
+	
+		this.userData.setResults(newResult);
+	  
+	  	this.resetFields();
 		
 	} 
 	
@@ -95,6 +148,11 @@ export class HomePage {
 		});
 		toast.present();
 		
+	}
+
+	resetFields(){
+		this.level = '';
+	  	this.units = '';
 	}
 
 	

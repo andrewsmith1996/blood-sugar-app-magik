@@ -24,8 +24,6 @@ export class UserData {
 			this.results.push(data);
 			this.storage.set('results', this.results);
 		});
-		
-		
 	  }
 	  
 

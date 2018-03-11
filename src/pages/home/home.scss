@@ -3,6 +3,18 @@ page-home {
         margin: auto;
         margin-top: 10px;
         width: 100%;
+
+        ion-icon{
+            float:right;
+            
+            &.thumbs-down{
+                color:red;
+            }
+
+            &.thumbs-up{
+                color:green;
+            }
+        }
     }
 
     button{

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>New Blood Sugar</ion-title>
+    <ion-title>Enter</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -32,6 +32,9 @@
                     <img src="assets/imgs/andrew.png">
                   </ion-thumbnail>
                   <h4> Average Level </h4>
+                  <ion-icon *ngIf="average < this.low.upper" name='thumbs-down' class="thumbs-down"></ion-icon>
+                  <ion-icon *ngIf="average > this.low.upper && average < this.good.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
+                  <ion-icon *ngIf="average > this.good.upper && average < this.high.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
                   <p> {{ average }} mmol/L </p>
                 </ion-item>
               </ion-list>
@@ -48,6 +51,9 @@
                           <img src="assets/imgs/andrew.png">
                         </ion-thumbnail>
                         <h4> Latest Result </h4>
+                        <ion-icon *ngIf="latestResult < this.low.upper" name='thumbs-down' class="thumbs-down"></ion-icon>
+                        <ion-icon *ngIf="latestResult > this.low.upper && latestResult < this.good.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
+                        <ion-icon *ngIf="latestResult > this.good.upper && latestResult < this.high.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
                         <p> {{ latestResult }} mmol/L </p>
                         <p> {{ latestTime }}</p>
                       </ion-item>
@@ -65,6 +71,9 @@
                     <img src="assets/imgs/andrew.png">
                   </ion-thumbnail>
                   <h4> Highest Level </h4>
+                  <ion-icon *ngIf="max < this.low.upper" name='thumbs-down' class="thumbs-down"></ion-icon>
+                  <ion-icon *ngIf="max > this.low.upper && max < this.good.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
+                  <ion-icon *ngIf="max > this.good.upper && average < this.high.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
                   <p> {{ max }} mmol/L </p>
                 </ion-item>
               </ion-list>
@@ -79,6 +88,9 @@
                     <img src="assets/imgs/andrew.png">
                   </ion-thumbnail>
                   <h4> Lowest Level</h4>
+                  <ion-icon *ngIf="min < this.low.upper" name='thumbs-down' class="thumbs-down"></ion-icon>
+                  <ion-icon *ngIf="min > this.low.upper && min < this.good.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
+                  <ion-icon *ngIf="min > this.good.upper && average < this.high.upper" name='thumbs-up' class="thumbs-up"></ion-icon>
                   <p> {{ min }} mmol/L </p>
 
                 </ion-item>

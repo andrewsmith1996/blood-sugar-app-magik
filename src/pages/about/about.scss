@@ -10,7 +10,25 @@ page-about {
 
     ion-range{
         ion-label{
-            width:70px;
+           
+        }
+    }
+    
+    .bound-ranges{
+        ion-item{
+            margin:10px auto;
+
+            .range-ios.range-has-pin{
+                padding-top:0px;
+            }
+
+            ion-badge{
+                margin:2px !important;
+            }
+            ion-label{
+                font-weight:700;
+
+            }
         }
     }
 }

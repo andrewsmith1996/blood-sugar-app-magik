@@ -14,6 +14,10 @@ export class ResultsPage {
   	date:any;
 	totalResults:any;
 
+	low:any = {};
+	good:any = {};
+	high:any = {};
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public userData:UserData) {
 	  
   }
@@ -23,12 +27,58 @@ export class ResultsPage {
 		this.results = val;
 		this.totalResults = this.results.length;
 	});
+
+	this.userData.getResults().then(val => {
+		this.results = val;
+	});
+
+	
+	this.userData.getLowBounds().then(val =>{
+		if(val != null){
+			this.low = val;
+		}
+	});
+
+	this.userData.getGoodBounds().then(val =>{
+		if(val != null){
+			this.good = val;
+		}
+	});
+
+	this.userData.getHighBounds().then(val =>{
+		if(val != null){
+			this.high = val;
+		}
+	});
   }
 
   ionViewWillEnter(){
 	this.userData.getResults().then(val => {
 		this.results = val;
 		this.totalResults = this.results.length;
+	});
+
+	this.userData.getResults().then(val => {
+		this.results = val;
+	});
+
+	
+	this.userData.getLowBounds().then(val =>{
+		if(val != null){
+			this.low = val;
+		}
+	});
+
+	this.userData.getGoodBounds().then(val =>{
+		if(val != null){
+			this.good = val;
+		}
+	});
+
+	this.userData.getHighBounds().then(val =>{
+		if(val != null){
+			this.high = val;
+		}
 	});
 	
   }

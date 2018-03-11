@@ -8,5 +8,17 @@ page-results {
             padding:0px 60px 0px !important;
         }
     }
+
+    h2{
+        strong{
+            &.thumbs-down{
+                color:red;
+            }
+        
+            &.thumbs-up{
+                color:green;
+            }
+        }
+    }
 }
     

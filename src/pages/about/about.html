@@ -31,28 +31,42 @@
 		  </ion-item>
 	</ion-list>
 
-	<ion-list>
+	<ion-list class="bound-ranges">
 		<ion-item>
-			<ion-range dualKnobs="true" pin="true" [(ngModel)]="low" color="dark">
-			<ion-label range-left class="small-text">Low level</ion-label>
-			  <ion-icon range-left small name="thumbs-down"></ion-icon>
-			  <ion-icon range-right name="thumbs-down"></ion-icon>
+			<ion-label range-left class="small-text">Low</ion-label>
+			<ion-badge item-end>{{ low.lower.toFixed(1) }} mmol/L</ion-badge>
+			<ion-badge item-end>{{ low.upper.toFixed(1) }} mmol/L</ion-badge>
+		</ion-item>
+
+		<ion-item>
+			<ion-range dualKnobs="true" pin="true" [(ngModel)]="low" color="dark" min="0" max="10">
+			  <ion-icon range-left small name="arrow-dropleft-circle"></ion-icon>
+			  <ion-icon range-right name="arrow-dropright-circle"></ion-icon>
 			</ion-range>
 		</ion-item>
 	
 		<ion-item>
-			<ion-range dualKnobs="true" pin="true" [(ngModel)]="good" color="dark">
-			<ion-label range-left class="small-text">Good level</ion-label>
-			  <ion-icon range-left small name="thumbs-up"></ion-icon>
-			  <ion-icon range-right name="thumbs-up"></ion-icon>
+			<ion-label range-left class="small-text">Good</ion-label>
+			<ion-badge item-end>{{ good.lower.toFixed(1) }} mmol/L</ion-badge>
+			<ion-badge item-end>{{ good.upper.toFixed(1) }} mmol/L</ion-badge>
+		</ion-item>
+
+		<ion-item>
+			<ion-range dualKnobs="true" pin="true" [(ngModel)]="good" color="dark" min="4" max="18">
+			  <ion-icon range-left small name="arrow-dropleft-circle"></ion-icon>
+			  <ion-icon range-right name="arrow-dropright-circle"></ion-icon>
 			</ion-range>
 		</ion-item>
-	
+		
 		<ion-item>
-			<ion-range dualKnobs="true" pin="true" [(ngModel)]="high" color="dark">
-			<ion-label range-left class="small-text">High level</ion-label>
-			  <ion-icon range-left small name="thumbs-down"></ion-icon>
-			  <ion-icon range-right name="thumbs-down"></ion-icon>
+				<ion-label range-left class="small-text">High</ion-label>
+				<ion-badge item-end>{{ high.lower.toFixed(1) }} mmol/L</ion-badge>
+				<ion-badge item-end>{{ high.upper.toFixed(1) }} mmol/L</ion-badge>
+		</ion-item>
+		<ion-item>
+			<ion-range dualKnobs="true" pin="true" [(ngModel)]="high" color="dark" min="9" max="50">
+			  <ion-icon range-left small name="arrow-dropleft-circle"></ion-icon>
+			  <ion-icon range-right name="arrow-dropright-circle"></ion-icon>
 			</ion-range>
 		</ion-item>
 	</ion-list>
