@@ -1,0 +1,18 @@
+page-edit-entry {
+    .bound-ranges{
+        ion-item{
+            padding-left:0;
+           h2{
+               strong{
+                   &.thumbs-down{
+                       color:red;
+                   }
+    
+                   &.thumbs-up{
+                       color:green;
+                   }
+                } 
+            }
+        }
+    }
+}

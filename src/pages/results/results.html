@@ -19,9 +19,13 @@
 
 			mmol/L  
 			- <strong>{{ result.units }}</strong> units
-		
+			
 			<button ion-button class="deleteResult" color="danger" (click)="delete(result)" clear icon-only>
 				<ion-icon name='trash' is-active="false"></ion-icon>
+			</button>
+		
+			<button ion-button class="editEntry" (click)="editEntry(result)" clear icon-only>
+				<ion-icon name='create' is-active="false"></ion-icon>
 			</button>
 
 

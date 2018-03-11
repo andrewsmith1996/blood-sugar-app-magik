@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Edit Blood Sugar
+      </ion-title>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <span ion-text color="primary" showWhen="ios">Cancel</span>
+          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-list class="bound-ranges">
+      <ion-item>
+          <h2>
+              <strong *ngIf="entry.level <= this.low.upper" class="thumbs-down">{{ entry.level }}</strong>
+              <strong *ngIf="entry.level > this.low.upper && entry.level <= this.good.upper" class="thumbs-up">{{ entry.level }}</strong>
+              <strong *ngIf="entry.level > this.good.upper && entry.level <= this.high.upper" class="thumbs-up">{{ entry.level }}</strong>
+        
+              mmol/L  
+              - <strong>{{ entry.units }}</strong> units
+              
+        
+            </h2>
+            <p>{{ entry.time }} </p>
+      </ion-item>
+  
+
+    <ion-item>
+           
+      <ion-label floating>
+          <ion-icon name="stats"></ion-icon>  mmol/L</ion-label>
+      <ion-input type="number"[(ngModel)]="level"></ion-input>
+  
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating><ion-icon name="text"></ion-icon> Units</ion-label>
+      <ion-input type="number"[(ngModel)]="units"></ion-input>
+  
+    </ion-item>
+  </ion-list>
+    <button full ion-button icon-left (click)="saveItem()"><ion-icon name="archive"></ion-icon>Save</button>
+  
+  
+     
+ 
+     
+    
+  
+  </ion-content>
+  
+  

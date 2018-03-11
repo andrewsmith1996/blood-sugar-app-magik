@@ -20,21 +20,38 @@ export class CarbsPage {
   calculatedCarbs:any;
   buttonClicked:boolean;
   carbNumber:any;
+  exercise:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public userData: UserData) {
   }
 
   ionViewDidLoad() {
-    this.buttonClicked = false;
-    console.log('ionViewDidLoad CarbsPage');
+	this.buttonClicked = false;
+	console.log('ionViewDidLoad CarbsPage');
   }
 
   calculateCarbs(){
-    this.buttonClicked = true;
-    this.userData.getCarbNumber().then(val => {
-      this.carbNumber = val;
-      this.calculatedCarbs = this.carbs / this.carbNumber;
-    })
+	this.buttonClicked = true;
+	this.calculatedCarbs = '';
+	this.userData.getCarbNumber().then(val => {
+	  this.carbNumber = val;
+	  this.calculatedCarbs = (this.carbs / this.carbNumber).toFixed(1);
+
+	if(this.exercise == "light"){
+		if(this.calculatedCarbs > 2){
+			this.calculatedCarbs -= 1;
+		}
+	} else if(this.exercise == "medium"){
+		if(this.calculatedCarbs > 2){
+			this.calculatedCarbs -= 2;
+		}
+	} else{
+		if(this.calculatedCarbs > 6){
+			this.calculatedCarbs -= 3;
+		}
+	}
+
+	})
 
    
   }

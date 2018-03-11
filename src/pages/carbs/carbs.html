@@ -1,32 +1,49 @@
 <!--
-  Generated template for the CarbsPage page.
+Generated template for the CarbsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/components/#navigation for more info on
+Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Carbs Calculator</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>Insulin Calculator</ion-title>
+	</ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-    
-    <ion-list>
+	<ion-list>
+		<ion-item>
+			<ion-label>Grams (g) in meal</ion-label>
+			<ion-input type="number"[(ngModel)]="carbs"></ion-input>
+		</ion-item>
+	</ion-list>
 
-        <ion-item>
-            <ion-label>Grams (g) in meal</ion-label>
-            <ion-input type="number"[(ngModel)]="carbs"></ion-input>
-          </ion-item>
-          <button full ion-button icon-left (click)="calculateCarbs()"><ion-icon name="calculator"></ion-icon>Calculate</button>
-      </ion-list>
+	<ion-list radio-group [(ngModel)]="exercise">
+		<ion-list-header>
+			Exercise
+		</ion-list-header>
+			
+		<ion-item>
+			<ion-label>Light</ion-label>
+			<ion-radio value="light"></ion-radio>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Medium</ion-label>
+			<ion-radio value="medium"></ion-radio>
+		</ion-item>
 
-      <div *ngIf="buttonClicked">
-        <h2 class="carb-value" text-center>{{ this.calculatedCarbs }}</h2>
-        <h2>units of insulin for this meal.</h2>
-      </div>
+		<ion-item>
+			<ion-label>Heavy</ion-label>
+			<ion-radio value="heavy"></ion-radio>
+		</ion-item>
+		
+	</ion-list>
 
+	<button full ion-button icon-left (click)="calculateCarbs()"><ion-icon name="calculator"></ion-icon>Calculate</button>
+
+	<div *ngIf="buttonClicked">
+		<h2 class="carb-value" text-center>{{ this.calculatedCarbs }}</h2>
+		<h2>units of insulin for this meal.</h2>
+	</div>
 </ion-content>

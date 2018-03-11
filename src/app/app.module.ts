@@ -8,6 +8,7 @@ import { ResultsPage } from '../pages/results/results';
 import { AboutPage } from '../pages/about/about';
 import { CarbsPage } from '../pages/carbs/carbs';
 import { TabsPage } from '../pages/tabs/tabs';
+import { EditEntryPage } from '../pages/edit-entry/edit-entry';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,8 @@ import { UserData } from '../providers/user-data/user-data';
     HomePage,
     TabsPage,
     AboutPage,
-    CarbsPage
+    CarbsPage,
+    EditEntryPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { UserData } from '../providers/user-data/user-data';
     HomePage,
     TabsPage,
     AboutPage,
-    CarbsPage
+    CarbsPage,
+    EditEntryPage
   ],
   providers: [
     StatusBar,

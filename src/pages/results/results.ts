@@ -4,6 +4,9 @@ import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 import { UserData } from '../../providers/user-data/user-data';
 
+import { ModalController } from 'ionic-angular';
+import { EditEntryPage } from '../edit-entry/edit-entry';
+
 @Component({
   selector: 'page-results',
   templateUrl: 'results.html'
@@ -18,7 +21,7 @@ export class ResultsPage {
 	good:any = {};
 	high:any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public userData:UserData) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public userData:UserData, public modalCtrl: ModalController) {
 	  
   }
 
@@ -107,6 +110,12 @@ export class ResultsPage {
 		this.userData.getResults().then(val => {
 			this.totalResults = this.results.length;
 		});
+	}
+
+	editEntry(item){
+		console.log(item);
+		let modal = this.modalCtrl.create(EditEntryPage, {item:item});
+		modal.present();
 	}
 
 }

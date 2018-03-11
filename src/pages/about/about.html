@@ -25,8 +25,7 @@
 	<ion-list no-border>
 		<ion-item>
 			<ion-icon name='nutrition' item-start></ion-icon>
-			1 Unit Per
-				<ion-label fixed>Carbs Number</ion-label>
+				<ion-label fixed placeholder="units">Carbs Number</ion-label>
 				<ion-input type="number"[(ngModel)]="carbCountValue"></ion-input>
 		  </ion-item>
 	</ion-list>
@@ -71,5 +70,5 @@
 		</ion-item>
 	</ion-list>
 
-	<button full round ion-button (click)="saveSettings()">Save</button>
+	<button full icon-left ion-button (click)="saveSettings()"><ion-icon name="settings"></ion-icon>Save</button>
 </ion-content>
