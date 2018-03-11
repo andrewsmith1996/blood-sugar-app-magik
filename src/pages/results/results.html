@@ -23,10 +23,19 @@
 			<button ion-button class="deleteResult" color="danger" (click)="delete(result)" clear icon-only>
 				<ion-icon name='trash' is-active="false"></ion-icon>
 			</button>
+
+
+			
 		</h2>
 		<p>{{ result.time }} </p>
 		</ion-item>
 	</ion-list>
-	<button ion-button color="danger" block (click)="deleteStorage()">Clear</button>
+	<button full ion-button icon-left color="danger" block (click)="deleteStorage()">
+		<ion-icon name="trash"></ion-icon>Clear
+	</button>
+
+	
+
+	
 </ion-content>
   

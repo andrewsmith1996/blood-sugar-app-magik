@@ -21,7 +21,7 @@
             <ion-label>Grams (g) in meal</ion-label>
             <ion-input type="number"[(ngModel)]="carbs"></ion-input>
           </ion-item>
-          <button full round ion-button (click)="calculateCarbs()">Calculate</button>
+          <button full ion-button icon-left (click)="calculateCarbs()"><ion-icon name="calculator"></ion-icon>Calculate</button>
       </ion-list>
 
       <div *ngIf="buttonClicked">
