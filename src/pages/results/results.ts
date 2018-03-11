@@ -25,16 +25,16 @@ export class ResultsPage {
 	  
   }
 
-  ionViewDidLoad(){
-	this.userData.getResults().then(val => {
-		this.results = val;
-		this.refreshResults();
+  ionViewDidEnter(){
+	  this.userData.getResults().then(val => {
+		if(val == null){
+			this.results = [];
+			this.totalResults = 0;
+		} else{
+			this.results = val;
+			this.refreshResults();
+		}
 	});
-
-	this.userData.getResults().then(val => {
-		this.results = val;
-	});
-
 	
 	this.userData.getLowBounds().then(val =>{
 		if(val != null){
@@ -53,37 +53,6 @@ export class ResultsPage {
 			this.high = val;
 		}
 	});
-  }
-
-  ionViewWillEnter(){
-	this.userData.getResults().then(val => {
-		this.results = val;
-		this.totalResults = this.results.length;
-	});
-
-	this.userData.getResults().then(val => {
-		this.results = val;
-	});
-
-	
-	this.userData.getLowBounds().then(val =>{
-		if(val != null){
-			this.low = val;
-		}
-	});
-
-	this.userData.getGoodBounds().then(val =>{
-		if(val != null){
-			this.good = val;
-		}
-	});
-
-	this.userData.getHighBounds().then(val =>{
-		if(val != null){
-			this.high = val;
-		}
-	});
-	
   }
 
 	deleteStorage(){

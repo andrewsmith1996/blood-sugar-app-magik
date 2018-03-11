@@ -11,19 +11,16 @@ export class UserData {
 	results:any[];
 
   constructor(public storage: Storage) {
-	console.log('Hello UserDataProvider Provider');
+	
   }
 
   	setResults(data){
-		this.getResults().then(val => {
-			if(typeof val == undefined || val == null){
-				this.results = [];
-			} else{
-				this.results = val;
-			}
-			this.results.push(data);
+		
+		
+			this.results = data;
+			
 			this.storage.set('results', this.results);
-		});
+
 	  }
 	  
 

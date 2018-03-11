@@ -21,7 +21,6 @@ export class HomePage {
   latestResult: any;
   latestTime: any;
   prev:any;
-
   average:any;
 
   low:any = {};
@@ -33,93 +32,52 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-
 	let toast = this.toastCtrl.create({
 		message: 'Welcome back, Andrew!',
 		duration: 3000,
 		position: 'top'
 	});
-
-	toast.present();
-
-	this.userData.getResults().then(val => {
-		this.results = val;
-		this.prev = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
-		
-		var total = 0.0;
-		var levels = [];
-
-		for (let result of this.results) {
-			total += parseFloat(result.level);
-			levels.push(parseFloat(result.level).toFixed(1));
-		}
-
-		this.latestResult = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
-		this.latestTime = this.results[this.results.length - 1].time;
-
-		this.average = (total / this.results.length).toFixed(1);
-
-		this.max = Math.max.apply(null, levels);
-		this.min = Math.min.apply(null, levels);
-
-	});
-
 	
+		toast.present();
+	}
 
-	this.userData.getLowBounds().then(val =>{
-		if(val != null){
-			this.low = val;
-		}
-	});
+	ionViewDidEnter(){
+		this.userData.getResults().then(val => {
+			if(val == null){
+				this.results = [];
+			} else{
+				this.results = val;
+				this.prev = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
+				this.calculateValues();
+				this.calculateAverage();
+			}
+			
+		});
 
-	this.userData.getGoodBounds().then(val =>{
-		if(val != null){
-			this.good = val;
-		}
-	});
+		this.userData.getLowBounds().then(val =>{
+			if(val != null){
+				this.low = val;
+			}
+		});
 
-	this.userData.getHighBounds().then(val =>{
-		if(val != null){
-			this.high = val;
-		}
-	});
+		this.userData.getGoodBounds().then(val =>{
+			if(val != null){
+				this.good = val;
+			}
+		});
+
+		this.userData.getHighBounds().then(val =>{
+			if(val != null){
+				this.high = val;
+			}
+		});
 
   }
 
-  ionViewWillEnter(){
-
-
-
-
-	this.userData.getResults().then(val => {
-		this.results = val;
-	});
-
-	
-	this.userData.getLowBounds().then(val =>{
-		if(val != null){
-			this.low = val;
-		}
-	});
-
-	this.userData.getGoodBounds().then(val =>{
-		if(val != null){
-			this.good = val;
-		}
-	});
-
-	this.userData.getHighBounds().then(val =>{
-		if(val != null){
-			this.high = val;
-		}
-	});
-
-	
-  }
 
   saveItem(){
   
-	  var valid = true;
+	var valid = true;
 
 	if(typeof(this.level) == undefined || this.level == ''){
 		valid = false;
@@ -137,36 +95,49 @@ export class HomePage {
 			'units': this.units
 		};
 
+		this.userData.getResults().then(val => {
+			if(val == null){
+				this.results = [];
+			} else{
+				this.results = val;
+			}
+			
+			this.results.push(newResult);
+			
+			this.userData.setResults(this.results);
 
-		if(parseFloat(this.level).toFixed(1) < this.prev){
-			this.showComparison(1);
-		} else if(parseFloat(this.level).toFixed(1) == this.prev){
-			this.showComparison(2);
-		} else{
-			this.showComparison(3);
-		}
+			
+
+				if(this.results.length != 0){
+					if((parseFloat(this.level).toFixed(1) < this.prev) && this.prev > 9 || (parseFloat(this.level).toFixed(1) > this.prev) && this.prev < 4){
+						this.showComparison(1);
+					} else{
+						this.showComparison(2);
+					}
+				}
+
+				this.resetFields();
+				this.calculateValues();
+				this.calculateAverage();
+		});
 	
-		this.userData.setResults(newResult);
-	  
-	  	this.resetFields();
-		
 	} 
 	
   }
 
   	showComparison(flag){
+
+		this.vibration.vibrate(1000);
+
 		var message = '';
 		var className = '';
 
 		if(flag == 1){
-			message = 'Your blood sugar was less than your previous result!';
-			className = 'downToast';
-		} else if(flag == 2) {
-			message = 'Your blood sugar was the same as your previous result!';
-			className = 'sameToast';
-		} else{
-			message = 'Your blood sugar was higher than your previous result.';
+			message = 'You have improved since your last result!';
 			className = 'upToast';
+		} else{
+			message = "You haven't improved your blood sugar since your last result!";
+			className = 'downToast';
 		}
 
 		let toast = this.toastCtrl.create({
@@ -192,6 +163,34 @@ export class HomePage {
 	resetFields(){
 		this.level = '';
 	  	this.units = '';
+	}
+
+	calculateAverage(){
+		var total = 0.0
+		var levels = [];
+		
+		for (let result of this.results) {
+			total += parseFloat(result.level);
+			levels.push(parseFloat(result.level).toFixed(1));
+		}
+
+
+		
+		this.average = (total / this.results.length).toFixed(1);
+	}
+
+	calculateValues(){
+		var levels = [];
+
+		for (let result of this.results) {
+			levels.push(parseFloat(result.level).toFixed(1));
+		}
+
+		this.latestResult = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
+		this.latestTime = this.results[this.results.length - 1].time;
+
+		this.max = Math.max.apply(null, levels);
+		this.min = Math.min.apply(null, levels);
 	}
 
 	

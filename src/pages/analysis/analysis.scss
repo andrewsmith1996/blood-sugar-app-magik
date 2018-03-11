@@ -1,0 +1,12 @@
+page-analysis {
+    .scroll-content {
+        background-color: map-get($colors, light);
+        padding:0px !important;
+    }
+
+    ion-card-header {
+        font-weight: bold;
+        font-size:14px !important;
+    }
+
+}
