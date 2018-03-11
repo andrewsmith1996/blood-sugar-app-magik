@@ -67,6 +67,7 @@ export class AnalysisPage {
 				}
 			}
 
+			this.generateLineData();
 			this.createPieChart();
 			this.createBarChart();
 			this.createLineChart();
@@ -114,6 +115,7 @@ export class AnalysisPage {
 			  labels: ["0.0 to 4.0", "4.0 to 8.0", "8.0 to 12.0", "12.0 to 18.0", "18.0 to 30.0"],
 				datasets: [{
 					label: 'No. of results',
+					showTooltips: false,
 					data: [this.batch_one, this.batch_two, this.batch_three, this.batch_four, this.batch_five],
 					
 					responsive: false,
@@ -170,6 +172,7 @@ export class AnalysisPage {
 				datasets: [{
 					label:"Occurences",
 					data: this.lineData,
+					showTooltips: false,
 					borderColor: [
 						'rgba(255,99,132,1)',
 						'rgba(54, 162, 235, 1)',
@@ -226,6 +229,7 @@ export class AnalysisPage {
 				datasets: [{
 					label:"Occurences",
 					data: this.lineData,
+					showTooltips: false,
 					borderColor: [
 						'rgba(255,99,132,1)',
 						'rgba(54, 162, 235, 1)',
@@ -272,6 +276,8 @@ export class AnalysisPage {
 	generateLineData(){
 		if(this.lineData == null){
 			this.lineData = [];
+		} else{
+			this.lineData = this.lineData;
 		}
 
 		if(this.labels == null){

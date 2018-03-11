@@ -46,6 +46,7 @@ export class HomePage {
 			if(val == null){
 				this.results = [];
 			} else{
+				console.log(val);
 				this.results = val;
 				this.prev = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
 				this.calculateValues();
