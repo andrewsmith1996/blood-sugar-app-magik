@@ -24,6 +24,9 @@ export class AnalysisPage {
   @ViewChild('lineCanvas') lineCanvas;
   lineChart: any;
 
+  @ViewChild('scatterCanvas') scatterCanvas;
+  scatterChart: any;
+
   results:any[];
   lineData:any[];
   labels:any[];
@@ -67,6 +70,7 @@ export class AnalysisPage {
 			this.createPieChart();
 			this.createBarChart();
 			this.createLineChart();
+			this.createScatterGraph();
 
 		});
 
@@ -111,14 +115,7 @@ export class AnalysisPage {
 				datasets: [{
 					label: 'No. of results',
 					data: [this.batch_one, this.batch_two, this.batch_three, this.batch_four, this.batch_five],
-					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
-					],
+					
 					responsive: false,
 					borderColor: [
 						'rgba(255,99,132,1)',
@@ -128,10 +125,23 @@ export class AnalysisPage {
 						'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)'
 					],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)',
+						'rgba(255, 159, 64, 0.6)'
+					],
 					borderWidth: 1
 				}]
 			},
 			options: {
+				legend: {
+					labels: {
+						fontSize:9
+					}
+				},
 				scales: {
 					yAxes: [{
 					  
@@ -154,25 +164,106 @@ export class AnalysisPage {
 		  
 	createLineChart(){
 		this.generateLineData();
-		console.log(this.lineData);
 		this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 			type: 'line',
-			data: this.lineData,
-			
-			options: {
+			data:{
+				datasets: [{
+					label:"Occurences",
+					data: this.lineData,
+					borderColor: [
+						'rgba(255,99,132,1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					backgroundColor: [
+						'rgba(54, 162, 235, 0.6)',
+					],
+				}],
+			},
 	
+			options: {
+				legend: {
+					labels: {
+						fontSize:9
+					}
+				},
 				scales: {
-					xAxes: [{
-						type: 'time',
-						time: {
-							unit: 'day',
-							unitStepSize: 1,
-							displayFormats: {
-							   'day': 'MMM DD'
-							}
-						}
-					}],
-					
+				  xAxes: [{
+					type: 'time',
+					position: 'bottom',
+					fontSize:9,
+					time: {
+					  unit: 'minute',
+					  displayFormats: {
+						day: 'HH MM'
+					  },
+					}
+				  }],
+				  yAxes: [{
+					  
+					ticks: {
+						beginAtZero:true,
+						suggestedMax: this.results.length,
+						 categoryPercentage: 2.0,
+						barPercentage: 2.0,
+						stepSize: 5,
+						fontSize: 10
+						
+					}
+				}]
+				}
+			}
+		});
+	}
+	createScatterGraph(){
+		this.generateLineData();
+		this.scatterChart = new Chart(this.scatterCanvas.nativeElement, {
+			type: 'scatter',
+			data:{
+				datasets: [{
+					label:"Occurences",
+					data: this.lineData,
+					borderColor: [
+						'rgba(255,99,132,1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					backgroundColor: [
+						'rgba(54, 162, 235, 0.6)',
+					],
+				}],
+			},
+	
+			options: {
+				scales: {
+				  xAxes: [{
+					type: 'time',
+					position: 'bottom',
+					time: {
+					  unit: 'minute',
+					  displayFormats: {
+						day: 'HH MM'
+					  },
+					}
+				  }],
+				  yAxes: [{
+					  
+					ticks: {
+						beginAtZero:true,
+						suggestedMax: this.results.length,
+						 categoryPercentage: 2.0,
+						barPercentage: 2.0,
+						stepSize: 5,
+						fontSize: 10
+						
+					}
+				}]
 				}
 			}
 		});
@@ -188,21 +279,22 @@ export class AnalysisPage {
 		}
 
 		for(let result of this.results){
+			// var dateTime = new Date("February 4, 2016 10:13:00");
 			var dateTime = new Date(result.time);
 
-			// var hours = (dateTime.getHours()<10?'0':'') + dateTime.getHours();
-			// var minutes = (dateTime.getMinutes()<10?'0':'') + dateTime.getMinutes();
+			var newPoint = {
+				y:parseFloat(result.level),
+				x:dateTime
+			};
+			
+			var hours = (dateTime.getHours()<10?'0':'') + dateTime.getHours();
+			var minutes = (dateTime.getMinutes()<10?'0':'') + dateTime.getMinutes();
 			
 			// var testTime = hours + ':' + minutes;
-			
+			var testTime = hours + ':' + minutes;
 
-			var newPoint = {
-				y:parseInt(result.level),
-				x:new Date()
-			};
-
-			
 			this.lineData.push(newPoint);
+			this.labels.push(testTime)
 		}
 	}
 
