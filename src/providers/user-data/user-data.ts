@@ -15,13 +15,9 @@ export class UserData {
   }
 
   	setResults(data){
-		
-		
-			this.results = data;
-			
-			this.storage.set('results', this.results);
-
-	  }
+		this.results = data;
+		this.storage.set('results', this.results);
+	}
 	  
 
 	getResults() {	
