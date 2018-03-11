@@ -13,9 +13,9 @@
 			<img src="assets/imgs/andrew.png">
 		</ion-avatar>
 		<h2>
-			<strong *ngIf="result.level < this.low.upper" class="thumbs-down">{{ result.level }}</strong>
-			<strong *ngIf="result.level > this.low.upper && result.level < this.good.upper" class="thumbs-up">{{ result.level }}</strong>
-			<strong *ngIf="result.level > this.good.upper && result.level < this.high.upper" class="thumbs-up">{{ result.level }}</strong>
+			<strong *ngIf="result.level <= this.low.upper" class="thumbs-down">{{ result.level }}</strong>
+			<strong *ngIf="result.level > this.low.upper && result.level <= this.good.upper" class="thumbs-up">{{ result.level }}</strong>
+			<strong *ngIf="result.level > this.good.upper && result.level <= this.high.upper" class="thumbs-up">{{ result.level }}</strong>
 
 			mmol/L  
 			- <strong>{{ result.units }}</strong> units

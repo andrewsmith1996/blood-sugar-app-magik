@@ -15,12 +15,13 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.upToast, .downToast{
+.upToast, .downToast, .sameToast{
     background-size:contain;
     text-align:center;
 
     .toast-message{
         color:white;
+        font-size:16px;
         padding:35px;
     }
 }
@@ -28,23 +29,34 @@
 .downToast{
   
     .toast-wrapper{
-        margin-top:50px;
+        // margin-top:50px;
         padding-bottom:40px;
         background: black url("../assets/imgs/down-arrow.png");
-        background-size:15%;
+        background-size:14%;
         background-repeat:no-repeat;
-        background-position: center 75%;
+        background-position: center 78%;
     }
 
 }
 
 .upToast{
     .toast-wrapper{
-        margin-top:50px;
+        // margin-top:50px;
         padding-bottom:40px;
         background: black url("../assets/imgs/up-arrow.png");
-        background-size:15%;
+        background-size:14%;
         background-repeat:no-repeat;
-        background-position: center 75%;
+        background-position: center 78%;
+    }
+}
+
+.sameToast{
+    .toast-wrapper{
+        // margin-top:50px;
+        padding-bottom:40px;
+        background: black url("../assets/imgs/same.png");
+        background-size:14%;
+        background-repeat:no-repeat;
+        background-position: center 78%;
     }
 }

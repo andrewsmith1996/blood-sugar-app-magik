@@ -25,7 +25,7 @@ export class ResultsPage {
   ionViewDidLoad(){
 	this.userData.getResults().then(val => {
 		this.results = val;
-		this.totalResults = this.results.length;
+		this.refreshResults();
 	});
 
 	this.userData.getResults().then(val => {
@@ -83,24 +83,30 @@ export class ResultsPage {
 	
   }
 
-  deleteStorage(){
+	deleteStorage(){
 		this.userData.clearData();
 		this.results = [];
-  }
+		this.refreshResults();
+ 	}
 
-  delete(item){
-	let index = this.results.indexOf(item);
-	if(index > -1){
-	   this.storage.get('results').then((val) => {
-		if(val != null && val.length > 0){
-		  this.results = val;
-		  this.results.splice(index, 1); 
-		  this.storage.set('results', this.results);
+	delete(item){
+		let index = this.results.indexOf(item);
+		if(index > -1){
+			this.storage.get('results').then((val) => {
+				if(val != null && val.length > 0){
+					this.results = val;
+					this.results.splice(index, 1); 
+					this.storage.set('results', this.results);
+					this.refreshResults();
+				}
+			});
 		}
-		});
-	   
-	 
 	}
-  }
+	  
+	refreshResults(){
+		this.userData.getResults().then(val => {
+			this.totalResults = this.results.length;
+		});
+	}
 
 }

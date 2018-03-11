@@ -33,7 +33,6 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-	
 
 	let toast = this.toastCtrl.create({
 		message: 'Welcome back, Andrew!',
@@ -45,17 +44,17 @@ export class HomePage {
 
 	this.userData.getResults().then(val => {
 		this.results = val;
-		this.prev = this.results[this.results.length - 1];
+		this.prev = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
 		
 		var total = 0.0;
 		var levels = [];
 
 		for (let result of this.results) {
 			total += parseFloat(result.level);
-			levels.push(parseFloat(result.level));
+			levels.push(parseFloat(result.level).toFixed(1));
 		}
 
-		this.latestResult = this.results[this.results.length - 1].level;
+		this.latestResult = parseFloat(this.results[this.results.length - 1].level).toFixed(1);
 		this.latestTime = this.results[this.results.length - 1].time;
 
 		this.average = (total / this.results.length).toFixed(1);
@@ -130,18 +129,21 @@ export class HomePage {
 	if(valid == true){
 
 		var current = new Date(); 
-	  	this.date = current.getHours() + ":"  + current.getMinutes() + " " + current.getDate() + "/" + (current.getMonth()+1)  + "/"  + current.getFullYear();
+	  	this.date = ("0" + current.getHours()).slice(-2) + ":"  + ("0" + current.getMinutes()).slice(-2) + " " + ("0" + current.getDate()).slice(-2) + "/" + ("0" + (current.getMonth() + 1)).slice(-2)  + "/"  + current.getFullYear();
 	  
 		var newResult = {
-			'level' : this.level,
+			'level' : parseFloat(this.level).toFixed(1),
 			'time': this.date, 
 			'units': this.units
 		};
 
-		if(this.level < this.prev){
-			this.showComparison(true);
+
+		if(parseFloat(this.level).toFixed(1) < this.prev){
+			this.showComparison(1);
+		} else if(parseFloat(this.level).toFixed(1) == this.prev){
+			this.showComparison(2);
 		} else{
-			this.showComparison(false);
+			this.showComparison(3);
 		}
 	
 		this.userData.setResults(newResult);
@@ -156,17 +158,20 @@ export class HomePage {
 		var message = '';
 		var className = '';
 
-		if(flag == true){
+		if(flag == 1){
 			message = 'Your blood sugar was less than your previous result!';
 			className = 'downToast';
-		} else {
+		} else if(flag == 2) {
+			message = 'Your blood sugar was the same as your previous result!';
+			className = 'sameToast';
+		} else{
 			message = 'Your blood sugar was higher than your previous result.';
 			className = 'upToast';
 		}
 
 		let toast = this.toastCtrl.create({
 			message:message,
-			duration: 3000,
+			duration: 1500,
 			position: 'middle',
 			cssClass: className,
 		});
