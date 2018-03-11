@@ -33,7 +33,7 @@
 
 	<ion-list class="bound-ranges">
 		<ion-item>
-			<ion-label range-left class="small-text">Low</ion-label>
+			<ion-label color="red" range-left class="small-text">Low</ion-label>
 			<ion-badge item-end>{{ low.lower.toFixed(1) }} mmol/L</ion-badge>
 			<ion-badge item-end>{{ low.upper.toFixed(1) }} mmol/L</ion-badge>
 		</ion-item>
@@ -46,7 +46,7 @@
 		</ion-item>
 	
 		<ion-item>
-			<ion-label range-left class="small-text">Good</ion-label>
+			<ion-label color="green" range-left class="small-text">Good</ion-label>
 			<ion-badge item-end>{{ good.lower.toFixed(1) }} mmol/L</ion-badge>
 			<ion-badge item-end>{{ good.upper.toFixed(1) }} mmol/L</ion-badge>
 		</ion-item>
@@ -59,7 +59,7 @@
 		</ion-item>
 		
 		<ion-item>
-				<ion-label range-left class="small-text">High</ion-label>
+				<ion-label color="red" range-left class="small-text">High</ion-label>
 				<ion-badge item-end>{{ high.lower.toFixed(1) }} mmol/L</ion-badge>
 				<ion-badge item-end>{{ high.upper.toFixed(1) }} mmol/L</ion-badge>
 		</ion-item>

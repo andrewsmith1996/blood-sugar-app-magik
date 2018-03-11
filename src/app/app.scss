@@ -14,3 +14,37 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.upToast, .downToast{
+    background-size:contain;
+    text-align:center;
+
+    .toast-message{
+        color:white;
+        padding:35px;
+    }
+}
+
+.downToast{
+  
+    .toast-wrapper{
+        margin-top:50px;
+        padding-bottom:40px;
+        background: black url("../assets/imgs/down-arrow.png");
+        background-size:15%;
+        background-repeat:no-repeat;
+        background-position: center 75%;
+    }
+
+}
+
+.upToast{
+    .toast-wrapper{
+        margin-top:50px;
+        padding-bottom:40px;
+        background: black url("../assets/imgs/up-arrow.png");
+        background-size:15%;
+        background-repeat:no-repeat;
+        background-position: center 75%;
+    }
+}

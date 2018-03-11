@@ -20,8 +20,8 @@ export class HomePage {
   min: any;
   latestResult: any;
   latestTime: any;
-  maxTime: any;
-  minTime: any;
+  prev:any;
+
   average:any;
 
   low:any = {};
@@ -33,6 +33,7 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
+	
 
 	let toast = this.toastCtrl.create({
 		message: 'Welcome back, Andrew!',
@@ -44,6 +45,8 @@ export class HomePage {
 
 	this.userData.getResults().then(val => {
 		this.results = val;
+		this.prev = this.results[this.results.length - 1];
+		
 		var total = 0.0;
 		var levels = [];
 
@@ -85,6 +88,10 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
+
+
+
+
 	this.userData.getResults().then(val => {
 		this.results = val;
 	});
@@ -130,6 +137,12 @@ export class HomePage {
 			'time': this.date, 
 			'units': this.units
 		};
+
+		if(this.level < this.prev){
+			this.showComparison(true);
+		} else{
+			this.showComparison(false);
+		}
 	
 		this.userData.setResults(newResult);
 	  
@@ -138,6 +151,27 @@ export class HomePage {
 	} 
 	
   }
+
+  	showComparison(flag){
+		var message = '';
+		var className = '';
+
+		if(flag == true){
+			message = 'Your blood sugar was less than your previous result!';
+			className = 'downToast';
+		} else {
+			message = 'Your blood sugar was higher than your previous result.';
+			className = 'upToast';
+		}
+
+		let toast = this.toastCtrl.create({
+			message:message,
+			duration: 3000,
+			position: 'middle',
+			cssClass: className,
+		});
+		toast.present();
+	  }
 
 
 	showInvalidToast(){
